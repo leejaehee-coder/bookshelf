@@ -472,7 +472,7 @@ title,author,genre,status,platform,coverUrl,note
      ✅ 모달 (여기가 수정본 핵심)
      ========================= */
 
-  .modalBackdrop{
+ .modalBackdrop{
   position: fixed;
   inset: 0;
   background: rgba(20, 14, 40, .38);
@@ -485,9 +485,8 @@ title,author,genre,status,platform,coverUrl,note
   padding: 18px;
   z-index: 999;
 
-  /* 🔥 모바일 스크롤 가능 */
-  overflow:auto;
-  -webkit-overflow-scrolling: touch;
+  /* ✅ 더블스크롤 제거 */
+  overflow:hidden;
 }
 
 .modal{
@@ -501,8 +500,10 @@ title,author,genre,status,platform,coverUrl,note
 
   display:flex;
   flex-direction:column;
-
   overflow:hidden;
+
+  /* 모바일 튕김 방지 */
+  overscroll-behavior: contain;
 }
 
 .modalHead{
@@ -516,10 +517,8 @@ title,author,genre,status,platform,coverUrl,note
 
 .modalBody{
   flex:1 1 auto;
-
-  /* 🔥 핵심: 내부 스크롤 */
   overflow:auto;
-  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling:touch;
 
   display:grid;
   grid-template-columns:220px 1fr;
@@ -535,11 +534,20 @@ title,author,genre,status,platform,coverUrl,note
   gap:10px;
   padding:12px 14px;
   border-top:1px solid rgba(160,140,210,.22);
-  background: rgba(255,255,255,.58);
+  background:rgba(255,255,255,.58);
 }
 
-/* ⭐ 모바일 대응 (표지 너무 커지는 문제 해결) */
+/* ⭐ 모바일 전용 */
 @media (max-width:760px){
+
+  .modalBackdrop{
+    align-items:flex-start;
+    padding:12px;
+  }
+
+  .modal{
+    max-height:calc(100dvh - 24px);
+  }
 
   .modalBody{
     grid-template-columns:1fr;
