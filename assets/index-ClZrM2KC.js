@@ -458,7 +458,10 @@ title,author,genre,status,platform,coverUrl,note
     border: 1px solid rgba(255,255,255,.85);
   }
 
-  /* ✅ 모달 */
+  /* =========================
+     ✅ 모달 (여기가 수정본 핵심)
+     ========================= */
+
   .modalBackdrop{
     position: fixed;
     inset: 0;
@@ -470,15 +473,21 @@ title,author,genre,status,platform,coverUrl,note
     padding: 18px;
     z-index: 999;
   }
+
   .modal{
     width: min(980px, 100%);
+    max-height: calc(100dvh - 36px);
     border-radius: 22px;
     border: 1px solid rgba(255,255,255,.65);
     background: rgba(255,255,255,.78);
     box-shadow: 0 18px 60px rgba(20, 12, 60, .28);
-    overflow:hidden;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
+
   .modalHead{
+    flex: 0 0 auto;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -489,14 +498,15 @@ title,author,genre,status,platform,coverUrl,note
     font-weight: 1000;
     letter-spacing: -0.2px;
   }
+
   .modalBody{
+    flex: 1 1 auto;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
     display:grid;
     grid-template-columns: 220px 1fr;
     gap: 12px;
     padding: 14px;
-  }
-  @media (max-width: 760px){
-    .modalBody{ grid-template-columns: 1fr; }
   }
 
   .modalCover{
@@ -541,6 +551,7 @@ title,author,genre,status,platform,coverUrl,note
   .modalGrid textarea{ min-height: 220px; }
 
   .modalActions{
+    flex: 0 0 auto;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -553,5 +564,13 @@ title,author,genre,status,platform,coverUrl,note
     display:flex;
     gap:10px;
     justify-content:flex-end;
+  }
+
+  /* ✅ 모바일에서 표지 너무 커지는 문제 + 폼 1열 */
+  @media (max-width: 760px){
+    .modalBody{ grid-template-columns: 1fr; padding: 12px; }
+    .modalCover{ max-width: 220px; width: 60%; margin: 0 auto; }
+    .modalGrid{ grid-template-columns: 1fr; }
+    .modalGrid textarea{ min-height: 160px; }
   }
 `;"serviceWorker"in navigator&&window.addEventListener("load",()=>{navigator.serviceWorker.register("/bookshelf/sw.js")});p1.createRoot(document.getElementById("root")).render(k.jsx(Qt.StrictMode,{children:k.jsx(Pw,{})}));
